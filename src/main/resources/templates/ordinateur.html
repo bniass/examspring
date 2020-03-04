@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{/save}" th:object="${ordi}" method="post">
+
+
+            <pre>
+                            INFORMATION ORDINATEUR <br/>
+            Code              : <input type="text" required th:field="*{code}">
+            Ram               : <input style="margin-top: 10px;" type="text" required th:field="*{ram}">
+            Disque            : <input style="margin-top: 10px;" type="text" required th:field="*{disque}">
+            Processeur        : <input style="margin-top: 10px;" type="text" required th:field="*{processeur}">
+            Ecran             : <input style="margin-top: 10px;" type="text" required th:field="*{ecran}">
+            Os                : <select id="os" th:field="*{os.id}">
+                                       <option value="0"> -- </option>
+                                       <option th:each="ops : ${lesos}"
+                                               th:value="${ops.id}"
+                                               th:text="${ops.libelle}"/>
+
+            <br/>
+            <div th:each="l : ${leslogiciels}">
+                <input type="checkbox" name="logi" th:value="${l.id}" th:text="${l.libelle+' '+l.version}">
+            </div>
+            <button type="submit">Ajouter</button>
+            </pre>
+
+
+    </form>
+    <span th:text="${error}"></span>
+</div>
+
+</body>
+</html>
